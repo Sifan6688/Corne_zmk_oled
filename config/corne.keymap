@@ -19,13 +19,14 @@
  *
  * Home row mods (tap = letter, hold = modifier):
  *   Left  A=GUI  S=ALT  D=CTRL  F=SHFT
- *   Right J=SHFT K=CTRL L=ALT  ;=GUI
+ *   Right J=SHFT K=CTRL L=ALT  '=GUI
  */
 
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
+#include <dt-bindings/zmk/pointing.h>   /* mmv, msc, mkp — requires CONFIG_ZMK_POINTING=y */
 
 /* Layer indices */
 #define BASE  0
@@ -93,17 +94,19 @@
         };
 
         /* ============================================================
-         * 1 – NAV  (activated by right-thumb SPC hold)
+         * 1 – NAV  (activated by left-thumb SPC hold)
          *
-         * [redo] [undo] [cut] [copy] [paste]    [redo] [undo] [cut] [copy] [paste]
-         *  GUI   ALT   CTRL  SHFT   –          CAPS  LEFT  DOWN   UP  RIGHT
-         *   –     –     –     –     –           INS  HOME  PGDN  PGUP   END
-         *          –     –     –                ENT   BSP   DEL
+         * Left hand = mods      Right hand = nav + clipboard
+         *
+         *   –    –    –    –    –          REDO UNDO  CUT COPY PASTE
+         *  GUI  ALT  CTRL SHFT  –          CAPS LEFT  DOWN  UP  RIGHT
+         *   –    –    –    –    –           INS HOME PGDN PGUP  END
+         *          –    –    –             ENT  BSP  DEL
          * ============================================================ */
         nav_layer {
             label = "NAV";
             bindings = <
-&none  &none       &none       &none       &none       &none          &none        &none        &none        &none       &none       &none
+&none  &none       &none       &none       &none       &none          &kp LC(Y)    &kp LC(Z)    &kp LC(X)    &kp LC(C)   &kp LC(V)   &none
 &none  &kp LGUI    &kp LALT    &kp LCTRL   &kp LSHFT   &none          &kp CAPS     &kp LEFT     &kp DOWN     &kp UP      &kp RIGHT   &none
 &none  &none       &none       &none       &none       &none          &kp INS      &kp HOME     &kp PG_DN    &kp PG_UP   &kp END     &none
                                &none       &none       &none          &kp RET      &kp BSPC     &kp DEL
@@ -112,22 +115,24 @@
 
         /* ============================================================
          * 2 – MOUSE  (activated by left-thumb ESC hold)
-         *   Miryoku mouse layer — mapped to scroll/pointer actions.
-         *   ZMK mouse key support requires CONFIG_ZMK_MOUSE=y in config.
-         *   Keys below use media/util fallbacks if mouse not enabled.
          *
-         * [redo] [undo] [cut] [copy] [paste]    [redo] [undo] [cut] [copy] [paste]
-         *  GUI   ALT   CTRL  SHFT   –           –    MS_L  MS_D  MS_U  MS_R
-         *   –     –     –     –     –           –    WH_L  WH_D  WH_U  WH_R
-         *          –     –     –               RCK   LCK   MCK
+         * Left hand = mods      Right hand = mouse move + scroll + clipboard
+         * Mouse buttons on thumbs: LCLK | RCLK | MCLK
+         *
+         * Requires CONFIG_ZMK_POINTING=y in config/corne.conf
+         *
+         *   –    –    –    –    –          REDO UNDO  CUT COPY PASTE
+         *  GUI  ALT  CTRL SHFT  –           –   MS_L MS_D MS_U MS_R
+         *   –    –    –    –    –           –   WH_L WH_D WH_U WH_R
+         *          –    –    –            RCLK LCLK MCLK
          * ============================================================ */
         mouse_layer {
             label = "MOUSE";
             bindings = <
-&none  &none       &none       &none       &none       &none          &none        &none        &none        &none        &none        &none
-&none  &kp LGUI    &kp LALT    &kp LCTRL   &kp LSHFT   &none          &none        &kp LEFT     &kp DOWN     &kp UP       &kp RIGHT    &none
-&none  &none       &none       &none       &none       &none          &none        &kp HOME     &kp PG_DN    &kp PG_UP    &kp END      &none
-                               &none       &none       &none          &kp RET      &kp BSPC     &kp DEL
+&none  &none       &none       &none       &none       &none      &kp LC(Y)        &kp LC(Z)        &kp LC(X)        &kp LC(C)        &kp LC(V)        &none
+&none  &kp LGUI    &kp LALT    &kp LCTRL   &kp LSHFT   &none      &none            &mmv MOVE_LEFT   &mmv MOVE_DOWN   &mmv MOVE_UP     &mmv MOVE_RIGHT  &none
+&none  &none       &none       &none       &none       &none      &none            &msc SCRL_LEFT   &msc SCRL_DOWN   &msc SCRL_UP     &msc SCRL_RIGHT  &none
+                               &none       &none       &none      &mkp RCLK        &mkp LCLK        &mkp MCLK
             >;
         };
 
