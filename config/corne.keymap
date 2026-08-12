@@ -111,10 +111,10 @@
         arrow_layer {
             label = "3";
             bindings = <
-&none  &none           &kp UP_ARROW    &none      &sys_reset  &kp NUMBER_1    &none  &none  &none  &none  &none  &none
-&none  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT  &none       &none           &none  &none  &none  &none  &none  &none
-&none  &none           &none           &none      &none       &none           &none  &none  &none  &none  &none  &none
-                                       &none      &none       &none           &none  &none  &none
+&none  &none           &kp UP_ARROW    &none      &sys_reset  &none    &none  &none  &none  &none  &none  &none
+&none  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT  &none       &none    &none  &none  &none  &none  &none  &none
+&none  &none           &none           &none      &none       &none    &none  &none  &none  &none  &none  &none
+                                       &none      &none       &none    &none  &none  &none
             >;
         };
     };
