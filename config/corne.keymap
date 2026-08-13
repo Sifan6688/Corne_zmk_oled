@@ -26,54 +26,7 @@
         };
     };
 
-    combos {
-        compatible = "zmk,combos";
-
-        a {
-            bindings = <&kp ESCAPE>;
-            key-positions = <2 1>;
-        };
-
-        b {
-            bindings = <&kp CLCK>;
-            key-positions = <14 15>;
-        };
-
-        c {
-            bindings = <&kp TAB>;
-            key-positions = <2 3>;
-        };
-
-        d {
-            bindings = <&kp BACKSPACE>;
-            key-positions = <10 9>;
-        };
-
-        e {
-            bindings = <&kp ENTER>;
-            key-positions = <22 21>;
-        };
-
-        f {
-            bindings = <&kp MINUS>;
-            key-positions = <19 20>;
-        };
-
-        g {
-            bindings = <&kp EQUAL>;
-            key-positions = <21 20>;
-        };
-
-        h {
-            bindings = <&sys_reset>;
-            key-positions = <1 29>;
-        };
-
-        j {
-            bindings = <&sys_reset>;
-            key-positions = <30 10>;
-        };
-    };
+    combos { compatible = "zmk,combos"; };
 
     keymap {
         compatible = "zmk,keymap";
@@ -111,10 +64,10 @@
         arrow_layer {
             label = "3";
             bindings = <
-&none  &none           &kp UP_ARROW    &none      &sys_reset  &none    &none  &none  &none  &none  &none  &none
-&none  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT  &none       &none    &none  &none  &none  &none  &none  &none
-&none  &none           &none           &none      &none       &none    &none  &none  &none  &none  &none  &none
-                                       &none      &none       &none    &none  &none  &none
+&none  &none           &kp UP_ARROW    &none      &sys_reset  &sys_reset    &none  &none  &none  &none  &none  &none
+&none  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT  &none       &none         &none  &none  &none  &none  &none  &none
+&none  &none           &none           &none      &none       &none         &none  &none  &none  &none  &none  &none
+                                       &none      &none       &none         &none  &none  &none
             >;
         };
     };
